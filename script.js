@@ -1,9 +1,24 @@
-let hours = document.querySelector(".hours");
-let minutes = document.querySelector(".minutes");
-let seconds = document.querySelector(".seconds");
+function currentTime() {
+    let date = new Date();
+    let hour = date.getHours();
+    let minutes = date.getMinutes();
+    let seconds = date.getSeconds();
+    let session = "AM";
 
-const date = new Date();
+    if (hour > 12) {
+        session = "PM";
+    }
 
-hours.innerHTML = date.getHours();
-minutes.innerHTML = ':' + date.getMinutes();
-seconds.innerHTML = ':' + date.getSeconds();
+    hour = (hour < 10) ? "0" + hour : hour;
+    minutes = (minutes < 10) ? "0" + minutes : minutes;
+    seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+    let time = hour + ":" + minutes + ":" + seconds + " " + session;
+
+    document.querySelector('.clock').innerText = time;
+    let Lt = setTimeout(function() {
+        currentTime();
+    }, 1000)
+}
+
+currentTime();
